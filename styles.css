@@ -1,0 +1,76 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header, footer {
+    background-color:#f8f9fa ;
+    padding: 10px;
+    text-align: center;
+}
+
+header img.logo {
+    height: 50px;
+}
+
+header .login-button {
+    float: right;
+    margin: 10px;
+}
+
+nav {
+    background-color: #343a40;
+    overflow: hidden;
+}
+
+nav a {
+    color: white;
+    padding: 14px 20px;
+    text-decoration: none;
+    text-align: center;
+    display: block;
+}
+
+nav a:hover {
+    background-color: #495057;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
+
+main {
+    padding: 20px;
+}
+
+.place-card, .review-card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 5px 0;
+}
+
+.place-image, .place-image-wide {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.detail-button, .add-review button {
+    display: block;
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.detail-button:hover, .add-review button:hover {
+    background-color: #0056b3;
+}
