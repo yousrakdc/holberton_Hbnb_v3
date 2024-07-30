@@ -5,35 +5,36 @@ body {
 }
 
 header, footer {
-    background-color:#f8f9fa ;
+    background-color: #e1c2f9;
     padding: 10px;
     text-align: center;
 }
 
-header img.logo {
-    height: 50px;
+header {
+    background-color: #e1c2f9;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-header .login-button {
-    float: right;
-    margin: 10px;
+.logo {
+    height: 50px; /* Adjust this value as needed */
 }
 
-nav {
-    background-color: #9e2bba;
-    overflow: hidden;
+header nav {
+    display: flex;
+    gap: 20px; /* This creates space between the nav items */
 }
 
-nav a {
-    color: white;
-    padding: 14px 20px;
+header a {
+    color: #007bff;
     text-decoration: none;
-    text-align: center;
-    display: block;
+    padding: 10px;
 }
 
-nav a:hover {
-    background-color: #495057;
+header a:hover {
+    text-decoration: underline;
 }
 
 footer {
@@ -47,16 +48,36 @@ main {
     padding: 20px;
 }
 
-.place-card, .review-card {
+#places-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.place-card {
     border: 1px solid #ddd;
     border-radius: 5px;
     padding: 15px;
     margin: 5px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.place-image, .place-image-wide {
+.place-image-container {
     width: 100%;
-    height: auto;
+    height: 200px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.place-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     border-radius: 5px;
 }
 
@@ -73,4 +94,21 @@ main {
 
 .detail-button:hover, .add-review button:hover {
     background-color: #0056b3;
+}
+
+.error-message {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    padding: 15px;
+    border-radius: 5px;
+    z-index: 1000;
+}
+
+#login-link {
+    display: inline-block;
 }

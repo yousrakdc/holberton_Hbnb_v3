@@ -9,12 +9,24 @@ const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(bodyParser.json());
-app.use(cors());
-app.use(express.static(path.join(__dirname)));
+app.use(cors({
+    origin: 'http://localhost:3000', // Specify the correct origin if necessary
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true // Allow credentials (cookies)
+}));
+app.use(express.static(path.join(__dirname))); // Serve static files from the root directory
 
 // Dummy user data
 const users = [
     { email: 'user@example.com', password: 'password123' }
+];
+
+// Dummy places data
+const places = [
+    { id: 1, name: 'Beautiful Beach House', price: 100, location: 'Miami, United States', image: 'place1.jpg' },
+    { id: 2, name: 'Cozy Cabin', price: 150, location: 'Toronto, Canada', image: 'place2.jpg' },
+    { id: 3, name: 'Modern Apartment', price: 200, location: 'New York, United States', image: 'place3.jpg' }
 ];
 
 // Secret key for JWT
@@ -33,14 +45,42 @@ app.post('/login', (req, res) => {
     }
 });
 
-// Serve login.html at root
+function authenticateToken(req, res, next) {
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
+
+    if (token == null) return res.sendStatus(401);
+
+    jwt.verify(token, SECRET_KEY, (err, user) => {
+        if (err) return res.sendStatus(403);
+        req.user = user;
+        next();
+    });
+}
+
+// Fetch places endpoint (authenticated)
+app.get('/places', authenticateToken, (req, res) => {
+    res.json(places);
+});
+
+// Serve index.html at root
 app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+// Serve login.html
+app.get('/login.html', (req, res) => {
     res.sendFile(path.join(__dirname, 'login.html'));
 });
 
 // Serve scripts.js
 app.get('/scripts.js', (req, res) => {
     res.sendFile(path.join(__dirname, 'scripts.js'));
+});
+
+// Serve styles.css
+app.get('/styles.css', (req, res) => {
+    res.sendFile(path.join(__dirname, 'styles.css'));
 });
 
 // Start the server
