@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Places</title>
+    <title>Available Places</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="scripts.js" defer></script>
 </head>
 <body>
     <header>
         <img src="logo.png" alt="HBnb Evolution Logo" class="logo">
         <nav>
-            <a href="index.html">Home</a>
             <a href="login.html" id="login-link">Login</a>
         </nav>
     </header>    
     <main>
-        <div>
+        <h1 class="available-places-title">Available places</h1>
+        <div class="filter-container">
             <label for="country-filter">Filter by Country:</label>
             <select id="country-filter" onchange="filterPlaces()">
                 <option value="">All</option>
+                <!-- Add options dynamically here -->
             </select>
         </div>
         <div id="places-list"></div>
@@ -27,7 +27,6 @@
     <footer>
         <p>&copy; 2024 HBnb Evolution. All rights reserved.</p>
     </footer>
+    <script src="scripts.js"></script>
 </body>
 </html>
-
-

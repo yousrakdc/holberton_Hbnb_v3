@@ -1,9 +1,12 @@
+/* General Styling */
 body {
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
     padding: 0;
+    background-color: #f5f5f5; /* Light background for contrast */
 }
 
+/* Header and Footer */
 header, footer {
     background-color: #e1c2f9;
     padding: 10px;
@@ -11,20 +14,18 @@ header, footer {
 }
 
 header {
-    background-color: #e1c2f9;
-    padding: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
 .logo {
-    height: 50px; /* Adjust this value as needed */
+    height: 50px; /* Adjust as needed */
 }
 
 header nav {
     display: flex;
-    gap: 20px; /* This creates space between the nav items */
+    gap: 20px; /* Space between nav items */
 }
 
 header a {
@@ -44,26 +45,49 @@ footer {
     text-align: center;
 }
 
+/* Main Content */
 main {
-    padding: 20px;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center all content horizontally */
 }
 
+/* Title for Available Places */
+.available-places-title {
+    font-weight: bold; /* Make text bold */
+    margin-bottom: 20px; /* Space between title and filter */
+    font-size: 24px; /* Adjust size as needed */
+    text-align: center; /* Center the title */
+    width: 100%; /* Full width to center-align */
+}
+
+/* Place Cards */
 #places-list {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive card width */
+    gap: 15px; /* Adjust gap between cards */
+    justify-content: center; /* Center the grid */
+    width: 100%; /* Full width for better alignment */
+    padding: 0 10px; /* Add padding to prevent content from touching edges */
+    max-width: 1200px; /* Maximum width for the grid container */
+    margin: 0 auto; /* Center the grid container */
 }
 
+/* Place Card Styling */
 .place-card {
     border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 15px;
-    margin: 5px 0;
+    border-radius: 10px; /* Rounded corners */
+    padding: 15px; /* Adjust padding */
+    background-color: #fff; /* White background for the card */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
     display: flex;
     flex-direction: column;
     align-items: center;
+    max-width: 280px; /* Max width for cards */
 }
 
+/* Place Image Container */
 .place-image-container {
     width: 100%;
     height: 200px;
@@ -71,44 +95,148 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 10px;
+    margin-bottom: 10px; /* Adjust spacing */
 }
 
 .place-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 5px;
+    border-radius: 10px; /* Rounded corners */
 }
 
-.detail-button, .add-review button {
-    display: block;
-    margin: 10px 0;
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
+/* Reviews Section */
+.reviews-section {
+    margin-top: 20px;
+}
+
+/* Review Box */
+.review-box {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px; /* Rounded corners */
+    background-color: #fff; /* White background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Review Card */
+.review-card {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px; /* Rounded corners */
+    background-color: #fff; /* White background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Add Review Box */
+#add-review {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px; /* Rounded corners */
+    background-color: #fff; /* White background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Space between Add Review Box and surrounding elements */
+#add-review textarea,
+#add-review button {
+    margin-top: 10px; /* Space between textarea, button, and container edges */
+}
+
+/* Additional styling for textarea and button inside Add Review Box */
+#add-review textarea {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px; /* Rounded corners */
+    background-color: #fff; /* White background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+
+}
+
+#add-review button {
+    padding: 10px 20px;
     border: none;
     border-radius: 5px;
+    background-color: #a065ae; /* Purple background */
+    color: white;
     cursor: pointer;
 }
 
-.detail-button:hover, .add-review button:hover {
-    background-color: #0056b3;
+#add-review button:hover {
+    background-color: #754584; /* Darker purple for hover effect */
 }
 
-.error-message {
+/* Button Styling */
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #a065ae; /* Purple background */
+    color: white;
+    cursor: pointer;
+    font-size: 16px; /* Adjust font size if needed */
+}
+
+button:hover {
+    background-color: #754584; /* Darker purple for hover effect */
+}
+
+/* Filter */
+#country-filter {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin-top: 10px; /* Space above the select */
+    width: 100%; /* Full width within the container */
+    max-width: 300px; /* Adjust this width as needed */
+    background-color: white; /* Purple background for filter button */
+    color: rgb(165, 60, 234); /* Text color */
+    border: none;
+    border-radius: 5px; /* Rounded corners */
+}
+
+#country-filter:hover {
+    background-color: #ffffff; /* Darker purple for hover effect */
+}
+
+/* Messages */
+.success-message, .error-message {
     position: fixed;
     top: 20px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
     padding: 15px;
     border-radius: 5px;
     z-index: 1000;
 }
 
-#login-link {
-    display: inline-block;
+.success-message {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.error-message {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Place Details */
+.place-details {
+    margin: 20px auto; /* Center horizontally */
+    padding: 20px; /* Space inside the box */
+    border: 1px solid #ddd; /* Border around the box */
+    border-radius: 15px; /* Rounded corners */
+    background-color: #fff; /* White background for better contrast */
+    max-width: 800px; /* Max width for better alignment */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow */
+}
+
+.place-image-large img {
+    width: 100%;
+    border-radius: 15px; /* Rounded corners for the image */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for the image */
 }
