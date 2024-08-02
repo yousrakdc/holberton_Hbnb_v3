@@ -29,7 +29,7 @@ header nav {
 }
 
 header a {
-    color: #007bff;
+    color: #020509;
     text-decoration: none;
     padding: 10px;
 }
@@ -57,7 +57,7 @@ main {
 .available-places-title {
     font-weight: bold; /* Make text bold */
     margin-bottom: 20px; /* Space between title and filter */
-    font-size: 24px; /* Adjust size as needed */
+    font-size: 40px; /* Adjust size as needed */
     text-align: center; /* Center the title */
     width: 100%; /* Full width to center-align */
 }
@@ -118,6 +118,7 @@ main {
     border-radius: 10px; /* Rounded corners */
     background-color: #fff; /* White background */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    margin-bottom: 20px;
 }
 
 /* Review Card */
@@ -143,18 +144,18 @@ main {
 /* Space between Add Review Box and surrounding elements */
 #add-review textarea,
 #add-review button {
-    margin-top: 10px; /* Space between textarea, button, and container edges */
+    margin-top: 20px; /* Space between textarea, button, and container edges */
 }
 
 /* Additional styling for textarea and button inside Add Review Box */
 #add-review textarea {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     margin-top: 20px;
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 10px; /* Rounded corners */
     background-color: #fff; /* White background */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-
 }
 
 #add-review button {
@@ -164,6 +165,7 @@ main {
     background-color: #a065ae; /* Purple background */
     color: white;
     cursor: pointer;
+    margin-top: 20px;
 }
 
 #add-review button:hover {
@@ -195,6 +197,7 @@ button:hover {
     color: rgb(165, 60, 234); /* Text color */
     border: none;
     border-radius: 5px; /* Rounded corners */
+    margin-bottom: 20px;
 }
 
 #country-filter:hover {
@@ -233,10 +236,71 @@ button:hover {
     background-color: #fff; /* White background for better contrast */
     max-width: 800px; /* Max width for better alignment */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow */
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .place-image-large img {
     width: 100%;
     border-radius: 15px; /* Rounded corners for the image */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for the image */
+}
+
+/* Container for rating stars */
+#rating {
+    display: flex;
+    gap: 5px;
+    direction: rtl; /* Reverse the direction to light up from left to right */
+}
+
+/* Hide the actual radio buttons */
+#rating input {
+    display: none; /* Hide radio buttons */
+}
+
+/* Default star style */
+#rating label {
+    font-size: 24px;
+    color: #ccc; /* Unselected star color */
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+/* Highlight stars to the left of the selected/hovered star */
+#rating input:checked ~ label {
+    color: #f39c12; /* Color for selected stars */
+}
+
+/* Highlight stars on hover from left to right */
+#rating label:hover,
+#rating label:hover ~ label {
+    color: #f39c12; /* Hover color for stars */
+}
+
+/* Ensure that stars highlight properly when selected */
+#rating input:checked ~ label {
+    color: #f39c12; /* Color for selected stars */
+}
+
+#rating input:checked + label {
+    color: #f39c12; /* Ensure the correct color for the selected star */
+}
+
+#rating input:checked + label ~ label {
+    color: #f39c12; /* Ensure all stars before the checked star are highlighted */
+}
+
+textarea {
+    width: 100%;
+    height: 100px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#message-container {
+    margin-top: 20px;
 }

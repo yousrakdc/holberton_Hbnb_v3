@@ -30,21 +30,29 @@ app.use(cors({
     credentials: true
 }));
 
-// Authentication Middleware
 function authenticateToken(req, res, next) {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
 
-    if (token == null) return res.sendStatus(401); // If no token, unauthorized
+    if (token == null) {
+        console.log('No token provided');
+        return res.sendStatus(401); // Unauthorized
+    }
 
     jwt.verify(token, SECRET_KEY, (err, user) => {
-        if (err) return res.sendStatus(403); // Forbidden
+        if (err) {
+            console.log('Token verification failed', err);
+            return res.sendStatus(403); // Forbidden
+        }
         req.user = user;
         next();
     });
 }
 
-// Routes
+app.get('/places', (req, res) => {
+    res.json(places);
+});
+
 app.get('/places/:placeId', (req, res) => {
     const placeId = req.params.placeId;
     const place = places.find(p => p.id === placeId);
@@ -54,10 +62,6 @@ app.get('/places/:placeId', (req, res) => {
     } else {
         res.status(404).json({ message: 'Place not found' });
     }
-});
-
-app.get('/places', authenticateToken, (req, res) => {
-    res.json(places);
 });
 
 app.post('/login', (req, res) => {
@@ -72,6 +76,68 @@ app.post('/login', (req, res) => {
     }
 });
 
+app.get('/places/:placeId/reviews', (req, res) => {
+    const placeId = req.params.placeId;
+    console.log('Fetching reviews for placeId:', placeId);
+
+    const place = places.find(p => p.id === placeId);
+
+    if (place) {
+        console.log('Found place:', place);
+        res.json(place.reviews);
+    } else {
+        console.log('Place not found');
+        res.status(404).json({ message: 'Place not found' });
+    }
+});
+
+app.post('/places/:placeId/reviews', (req, res) => {
+    const placeId = req.params.placeId;
+    const { review, rating } = req.body;
+
+    // Validate input
+    if (!placeId || !review || !rating) {
+        return res.status(400).json({ message: 'Missing required fields' });
+    }
+
+    // Check if place exists
+    const place = places.find(p => p.id === placeId);
+    if (!place) {
+        return res.status(404).json({ message: 'Place not found' });
+    }
+
+    // Add review to the place
+    reviews[placeId].push({ review, rating });
+    res.status(201).json({ message: 'Review submitted successfully' });
+});
+
+app.delete('/places/:placeId/reviews/:reviewIndex', authenticateToken, (req, res) => {
+    const { placeId, reviewIndex } = req.params;
+    const email = req.user.email;
+
+    console.log('Delete review request:', { placeId, reviewIndex, email });
+
+    const place = places.find(p => p.id === placeId);
+
+    if (place) {
+        const reviewIndexInt = parseInt(reviewIndex, 10);
+        if (isNaN(reviewIndexInt) || reviewIndexInt < 0 || reviewIndexInt >= place.reviews.length) {
+            return res.status(400).json({ message: 'Invalid review index' });
+        }
+
+        const review = place.reviews[reviewIndexInt];
+        if (review.user !== email) {
+            return res.status(403).json({ message: 'You can only delete your own reviews' });
+        }
+
+        place.reviews.splice(reviewIndexInt, 1);
+        console.log('Review deleted:', review);
+        res.status(200).json({ message: 'Review deleted successfully' });
+    } else {
+        res.status(404).json({ message: 'Place not found' });
+    }
+});
+
 // Serve static files after routes
 app.use(express.static(path.join(__dirname)));
 
@@ -83,16 +149,6 @@ app.get('/', (req, res) => {
 // Serve login.html
 app.get('/login.html', (req, res) => {
     res.sendFile(path.join(__dirname, 'login.html'));
-});
-
-// Serve scripts.js
-app.get('/scripts.js', (req, res) => {
-    res.sendFile(path.join(__dirname, 'scripts.js'));
-});
-
-// Serve styles.css
-app.get('/styles.css', (req, res) => {
-    res.sendFile(path.join(__dirname, 'styles.css'));
 });
 
 // Start the server
